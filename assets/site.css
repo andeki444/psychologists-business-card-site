@@ -280,7 +280,7 @@ a {
   pointer-events: none;
 }
 
-.site-thread path, .thread-coil path, .thread-person path {
+.site-thread path, .thread-signature path, .thread-person path {
   fill: none;
   stroke: var(--gold-dark);
   stroke-width: 1.4;
@@ -288,37 +288,44 @@ a {
   stroke-linejoin: round;
 }
 
-#thread-guide {
-  opacity: .2;
+.site-thread path {
+  stroke: url("#thread-ink") var(--gold-dark);
 }
 
-.thread-coil, .thread-person {
+#thread-ink stop {
+  stop-color: var(--gold-dark);
+}
+
+#thread-guide {
+  opacity: .16;
+}
+
+.thread-signature, .thread-person {
   display: block;
   height: auto;
   pointer-events: none;
 }
 
-.thread-coil {
-  width: clamp(4.6rem, 8.5vw, 8rem);
-  margin-bottom: .85rem;
+.thread-signature {
+  width: min(100%, clamp(14.5rem, 64vw, 22rem));
+  margin-top: .18rem;
 }
 
 .thread-person {
-  width: clamp(4.5rem, 7.5vw, 6.75rem);
-  margin-inline-start: clamp(1.45rem, 6vw, 4.75rem);
+  width: clamp(4rem, 6.7vw, 5rem);
 }
 
-.thread-coil path, .thread-person path {
+.thread-signature path, .thread-person path {
   stroke: url("#thread-foil") var(--gold-dark);
 }
 
-.thread-coil .thread-highlight {
+.thread-signature .thread-highlight {
   stroke: var(--gold-base);
   stroke-width: .9;
   opacity: .75;
 }
 
-.thread-coil circle, .thread-person circle {
+.thread-signature circle, .thread-person circle {
   fill: var(--gold-dark);
 }
 
@@ -1021,6 +1028,17 @@ a {
   font-size: .875rem;
 }
 
+.footer-signature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .85rem;
+}
+
+.thread-ready .footer-signature {
+  border-top-color: transparent;
+}
+
 @media (min-width: 24rem) {
   .topic-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1054,18 +1072,6 @@ a {
   .format-layout, .faq-layout, .contact-layout {
     grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
     gap: clamp(2rem, 6vw, 6rem);
-  }
-
-  .contact-layout {
-    row-gap: .85rem;
-  }
-
-  .contact-card {
-    grid-area: 1 / 2 / span 2 / 3;
-  }
-
-  .thread-person {
-    grid-column: 1;
   }
 
   .faq-context {
@@ -1170,7 +1176,7 @@ a {
     margin-bottom: .7rem;
   }
 
-  h1::after, h2::after {
+  h2::after {
     content: "";
     display: block;
     width: clamp(5rem, 8vw, 7.5rem);
@@ -1179,12 +1185,7 @@ a {
     background: var(--ink-stroke) left center / 100% 100% no-repeat;
   }
 
-  .hero h1::after {
-    width: clamp(7rem, 12vw, 10.5rem);
-    height: .78rem;
-  }
-
-  h1 .ink-underline, h2 .ink-underline {
+  h2 .ink-underline {
     padding-bottom: 0;
     background: none;
   }
@@ -1261,6 +1262,12 @@ a {
   .about-copy p {
     max-width: 48ch;
     font-size: 1.08rem;
+  }
+}
+
+@media (max-width: 63.99rem) {
+  .thread-ready :is(.requests, .format, .faq, .about, .contact) {
+    border-top-color: transparent;
   }
 }
 
