@@ -22,6 +22,7 @@
   --acrylic: url("acrylic-wash.webp");
   --ink-corner: url("ink-corner.svg");
   --ink-stroke: url("ink-stroke.svg?v=gold");
+  --brand-mark: url("brand-mark.svg");
   --graphite-hatch: url("graphite-hatch.svg");
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='144'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='144' height='144' filter='url(%23grain)' opacity='.065'/%3E%3C/svg%3E");
 }
@@ -168,7 +169,7 @@ a {
 .brand-mark {
   flex: none;
   width: clamp(1.65rem, 5.2vw, 2.25rem);
-  color: var(--ink);
+  height: auto;
 }
 
 .header-links {
@@ -262,12 +263,17 @@ a {
 }
 
 .bookend-copy::before, .section-hatched::before {
+  --mark-size: clamp(1.65rem, 2.3vw, 1.9rem);
+  --mark-gap: .4rem;
+  --hatch-width: clamp(2.6rem, 4.6vw, 3.5rem);
   content: "";
   display: block;
-  width: clamp(4.1rem, 8vw, 6.5rem);
-  height: clamp(1.15rem, 2.1vw, 1.75rem);
-  margin-bottom: .8rem;
-  background: var(--graphite-hatch) left center / contain no-repeat;
+  width: calc(var(--mark-size) + var(--mark-gap) + var(--hatch-width));
+  height: var(--mark-size);
+  margin-bottom: .6rem;
+  background:
+    var(--brand-mark) left center / var(--mark-size) var(--mark-size) no-repeat,
+    var(--graphite-hatch) calc(var(--mark-size) + var(--mark-gap)) center / var(--hatch-width) auto no-repeat;
 }
 
 .site-thread {
@@ -349,10 +355,6 @@ a {
 
 .hero-copy {
   min-width: 0;
-}
-
-.hero-copy::before {
-  content: none;
 }
 
 .hero h1 {
@@ -1168,12 +1170,6 @@ a {
 
   .lettering-title {
     font-size: clamp(3.1rem, 4.4vw, 4rem);
-  }
-
-  .bookend-copy::before, .section-hatched::before {
-    width: 4.4rem;
-    height: 1.2rem;
-    margin-bottom: .7rem;
   }
 
   h2::after {
