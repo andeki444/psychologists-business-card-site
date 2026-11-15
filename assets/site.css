@@ -63,7 +63,6 @@ h1, h2, .hero-art figcaption {
 }
 
 h1, h2 {
-  text-transform: lowercase;
   text-wrap: balance;
 }
 
