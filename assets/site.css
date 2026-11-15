@@ -292,30 +292,21 @@ a {
 }
 
 .hero h1 {
-  font-size: clamp(3.45rem, 14.5vw, 5.25rem);
-  line-height: .95;
+  font-size: clamp(2.28rem, 10.4vw, 4.25rem);
+  line-height: 1;
   letter-spacing: -.028em;
+}
+
+.hero-title-role {
+  display: block;
+  margin-top: .26em;
+  font-size: .66em;
+  line-height: 1.14;
+  letter-spacing: -.015em;
 }
 
 .lettering-title {
   font-size: clamp(2.85rem, 7vw, 4.8rem);
-}
-
-.hero-lead {
-  max-width: 33rem;
-  margin-top: 1.45rem;
-  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-  line-height: 1.5;
-}
-
-.hero-lead span {
-  display: block;
-  margin-top: .38rem;
-  color: var(--muted);
-  font-size: .78rem;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: .085em;
 }
 
 .hero-art {
@@ -337,14 +328,11 @@ a {
 .hero-portrait, .about-photo img {
   width: 100%;
   height: auto;
-  object-fit: cover;
   box-shadow: 0 .65rem 1.75rem rgb(56 56 58 / 13%);
 }
 
 .hero-portrait {
   grid-area: 1 / 2;
-  aspect-ratio: 5 / 5.8;
-  object-position: center 46%;
 }
 
 .hero-art figcaption {
@@ -486,21 +474,39 @@ a {
 .primary-action {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
+  gap: .68rem;
   min-height: 3rem;
-  padding: .65rem 1.05rem;
-  border: 1px solid var(--gold-base);
-  border-radius: .15rem;
-  background: var(--ink);
-  color: #FFFEFB;
+  max-width: 100%;
+  padding: .42rem .5rem .42rem 1.05rem;
+  border: 1px solid var(--gold-dark);
+  border-radius: 999px;
+  background: #FAF3E2;
+  color: var(--ink);
+  box-shadow: inset 0 1px 0 #FFFEFB, 0 .16rem .65rem rgb(112 85 31 / 12%);
   font-size: .94rem;
-  font-weight: 700;
+  font-weight: 600;
+  line-height: 1.35;
   text-decoration: none;
-  transition: background-color .2s ease;
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.primary-action > span {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.9rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #EFE2C1;
+  color: var(--focus);
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .primary-action:hover {
-  background: #4B4B4E;
+  border-color: var(--focus);
+  background: #F3E8CD;
+  box-shadow: inset 0 1px 0 #FFFEFB, 0 .22rem .75rem rgb(112 85 31 / 17%);
 }
 
 .format {
@@ -665,9 +671,6 @@ a {
 .faq-photo img {
   width: 100%;
   height: auto;
-  aspect-ratio: 6 / 5;
-  object-fit: cover;
-  object-position: center 41%;
 }
 
 .faq-photo::after {
@@ -860,13 +863,6 @@ a {
   justify-self: center;
 }
 
-.about-photo img {
-  aspect-ratio: 24 / 25;
-  object-position: center 3%;
-  filter: brightness(1.055) contrast(.98) saturate(.96);
-  background: var(--ink);
-}
-
 .contact {
   --wash-top: -37%;
   --wash-left: -17%;
@@ -933,11 +929,6 @@ a {
 
 .request-review li::marker {
   color: var(--gold-dark);
-}
-
-.telegram-action .primary-action {
-  justify-content: space-between;
-  width: 100%;
 }
 
 .telegram-action p {
@@ -1013,7 +1004,7 @@ a {
   }
 
   .hero h1 {
-    font-size: clamp(3.65rem, 7.4vw, 7.1rem);
+    font-size: clamp(2.7rem, 4.85vw, 4.15rem);
   }
 
   .format-layout, .faq-layout, .contact-layout {
@@ -1057,6 +1048,164 @@ a {
 
   .contact-label {
     grid-column: auto;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --muted: #504F57;
+    --surface: rgb(253 252 248 / 96%);
+    --section-space: clamp(3.75rem, 5.2vw, 5rem);
+    --desktop-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+    --desktop-gap: clamp(2.75rem, 5.3vw, 5rem);
+  }
+
+  .painted {
+    --wash-width: min(60vw, 57rem);
+    --wash-height: min(82%, 37rem);
+    --wash-top: -24%;
+    --wash-right: max(-13rem, calc(50% - 49rem));
+    --wash-left: max(-16rem, calc(50% - 52rem));
+    --wash-bottom: -31%;
+    --wash-opacity: .28;
+    --wash-echo-opacity: .23;
+  }
+
+  .hero {
+    --wash-width: min(59vw, 57rem);
+    --wash-height: 96%;
+    --wash-top: -7%;
+    --wash-right: max(-13rem, calc(50% - 52rem));
+    --wash-bottom: -39%;
+    --wash-opacity: .37;
+  }
+
+  .requests, .faq {
+    --wash-left: max(-9rem, calc(50% - 48rem));
+    --wash-bottom: -25%;
+  }
+
+  .about {
+    --wash-top: 12%;
+    --wash-opacity: .32;
+  }
+
+  .contact {
+    --wash-top: -42%;
+    --wash-echo-opacity: .27;
+  }
+
+  .hero-layout, .requests > .wrap, .format-layout, .faq-layout, .about-layout, .contact-layout {
+    grid-template-columns: var(--desktop-columns);
+    column-gap: var(--desktop-gap);
+  }
+
+  h2 {
+    font-size: clamp(2.85rem, 4.2vw, 3.75rem);
+  }
+
+  .lettering-title {
+    font-size: clamp(3.1rem, 4.4vw, 4rem);
+  }
+
+  .bookend-copy::before, .section-hatched::before {
+    width: 4.4rem;
+    height: 1.2rem;
+    margin-bottom: .7rem;
+  }
+
+  h1::after, h2::after {
+    content: "";
+    display: block;
+    width: clamp(5rem, 8vw, 7.5rem);
+    height: .6rem;
+    margin-top: .18em;
+    background: var(--ink-stroke) left center / 100% 100% no-repeat;
+  }
+
+  .hero h1::after {
+    width: clamp(7rem, 12vw, 10.5rem);
+    height: .78rem;
+  }
+
+  h1 .ink-underline, h2 .ink-underline {
+    padding-bottom: 0;
+    background: none;
+  }
+
+  .hero-art {
+    width: min(100%, 29.25rem);
+    margin-inline: 0;
+    justify-self: end;
+  }
+
+  .requests > .wrap {
+    display: grid;
+    align-items: start;
+    row-gap: 1.25rem;
+  }
+
+  .requests-intro {
+    grid-row: span 2;
+    margin-bottom: 0;
+  }
+
+  .topic-list, .topic-actions {
+    grid-column: 2;
+  }
+
+  .topic-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+  }
+
+  .topic-list .topic-wide {
+    grid-column: auto;
+  }
+
+  .topic-list > li > label {
+    min-height: 4.5rem;
+    padding: .9rem 1rem;
+    border-radius: .3rem;
+    font-size: 1rem;
+  }
+
+  .topic-list .topic-other:has(.topic-other-fields[hidden]) > label {
+    height: 100%;
+  }
+
+  .topic-list .topic-other:has(.topic-other-fields:not([hidden])) > label {
+    border-radius: .3rem .3rem 0 0;
+  }
+
+  .topic-other-fields {
+    border-radius: 0 0 .3rem .3rem;
+  }
+
+  .topic-actions {
+    margin-top: 0;
+  }
+
+  .requests-intro p, .format-intro > p:first-of-type, .faq-context p, .contact-intro p {
+    max-width: 41ch;
+    font-size: 1.04rem;
+  }
+
+  .pricing {
+    margin-inline-start: -1.2rem;
+  }
+
+  .about h2 {
+    margin-bottom: 1.85rem;
+  }
+
+  .about-photo {
+    width: min(100%, 21rem);
+  }
+
+  .about-copy p {
+    max-width: 48ch;
+    font-size: 1.08rem;
   }
 }
 
