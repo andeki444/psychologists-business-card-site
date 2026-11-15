@@ -53,12 +53,70 @@ updateReview();
 const paintedSections = document.querySelectorAll(".painted");
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const rootStyle = document.documentElement.style;
+const threadStart = document.getElementById("thread-start");
+const threadHand = document.getElementById("thread-hand");
+const threadGuide = document.getElementById("thread-guide");
+const threadLine = document.getElementById("thread-line");
 
 let activeSection = null;
 let pendingFrame = 0;
+let threadBounds;
+
+function updateThreadProgress() {
+  if (!threadBounds) return;
+
+  const { start, end, length } = threadBounds;
+  const viewportBottom = window.scrollY + window.innerHeight;
+  const atBottom = document.documentElement.scrollHeight - viewportBottom < 2;
+  const readingPoint = window.scrollY + window.innerHeight * .8;
+  const progress = motionPreference.matches || atBottom
+    ? 1
+    : Math.min(1, Math.max(0, (readingPoint - start) / (end - start)));
+
+  threadLine.setAttribute("stroke-dashoffset", (length * (1 - progress)).toFixed(2));
+}
+
+function layoutThread() {
+  if (!threadStart || !threadHand || !threadGuide || !threadLine) return;
+
+  const scrollY = window.scrollY;
+  const start = threadStart.getBoundingClientRect();
+  const hand = threadHand.getBoundingClientRect();
+  const startX = start.left + start.width / 2;
+  const startY = start.top + start.height / 2 + scrollY;
+  const endX = hand.left + hand.width / 2;
+  const endY = hand.top + hand.height / 2 + scrollY;
+  const gutter = threadStart.closest(".wrap").getBoundingClientRect().left;
+  const edge = gutter - Math.min(55, gutter * .54);
+  const sway = Math.min(34, gutter * .27);
+  const lastSection = paintedSections[paintedSections.length - 1];
+
+  let y = startY + 28;
+  let route = `M ${startX} ${startY} C ${startX - 9} ${startY + 8}, ${edge} ${startY + 7}, ${edge} ${y}`;
+
+  for (const [index, section] of paintedSections.entries()) {
+    const nextY = section === lastSection ? endY - 26 : section.getBoundingClientRect().bottom + scrollY;
+    const height = nextY - y;
+    const turn = edge + (index % 2 === 0 ? -sway : sway);
+    route += ` C ${edge} ${y + height * .24}, ${turn} ${y + height * .34}, ${turn} ${y + height * .53}`;
+    route += ` C ${turn} ${y + height * .69}, ${edge} ${y + height * .81}, ${edge} ${nextY}`;
+    y = nextY;
+  }
+
+  const approach = Math.min(29, (endX - edge) * .38);
+  route += ` C ${edge} ${endY - 6}, ${endX - approach} ${endY - 3}, ${endX} ${endY}`;
+
+  threadGuide.setAttribute("d", route);
+  threadLine.setAttribute("d", route);
+  const length = threadLine.getTotalLength();
+  threadBounds = { start: startY, end: endY, length };
+  threadLine.setAttribute("stroke-dasharray", `${length} ${length}`);
+  updateThreadProgress();
+}
 
 function updatePaint() {
   pendingFrame = 0;
+  updateThreadProgress();
 
   if (motionPreference.matches) {
     rootStyle.removeProperty("--current-tone");
@@ -94,10 +152,23 @@ function schedulePaint() {
 }
 
 window.addEventListener("scroll", schedulePaint, { passive: true });
-window.addEventListener("resize", schedulePaint);
-window.addEventListener("pageshow", schedulePaint);
+window.addEventListener("resize", () => {
+  layoutThread();
+  schedulePaint();
+});
+window.addEventListener("pageshow", () => {
+  layoutThread();
+  schedulePaint();
+});
 motionPreference.addEventListener("change", schedulePaint);
 
+layoutThread();
+if (threadBounds && "ResizeObserver" in window) {
+  const threadResize = new ResizeObserver(layoutThread);
+  threadResize.observe(document.body);
+  threadResize.observe(document.querySelector(".hero-copy"));
+  threadResize.observe(document.querySelector(".contact-intro"));
+}
 updatePaint();
 
 if ("IntersectionObserver" in window && !motionPreference.matches) {
