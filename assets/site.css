@@ -350,8 +350,12 @@ a {
   padding: .55rem .65rem;
   background: var(--surface);
   border-left: 1px solid var(--gold-dark);
-  font-size: clamp(.75rem, 1.2vw, .95rem);
-  line-height: 1.5;
+  font-family: var(--handwriting);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.14;
+  text-wrap: balance;
 }
 
 .requests, .format, .faq, .about, .contact {
@@ -508,15 +512,6 @@ a {
   --wash-bottom: -23%;
 }
 
-.format-note {
-  margin-top: 1.15rem;
-  padding: .6rem .85rem;
-  border-left: 2px solid var(--gold-dark);
-  background: var(--surface);
-  color: var(--muted);
-  font-size: .9375rem;
-}
-
 .price-list {
   position: relative;
   display: grid;
@@ -625,11 +620,21 @@ a {
   line-height: 1.2;
 }
 
+.pricing-note, .format-note {
+  margin: .9rem 0 0 1.2rem;
+}
+
 .pricing-note {
-  margin-top: .9rem;
-  padding-left: 1.2rem;
   color: var(--muted);
   font-size: .91rem;
+}
+
+.format-note {
+  padding: .6rem .85rem;
+  border-left: 2px solid var(--gold-dark);
+  background: var(--surface);
+  font-size: .875rem;
+  line-height: 1.55;
 }
 
 .faq {
@@ -643,7 +648,7 @@ a {
 
 .faq-context {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(5.75rem, 29vw, 8.25rem);
+  grid-template-columns: minmax(0, 1fr) clamp(6.5rem, 34vw, 9.5rem);
   gap: .75rem 1rem;
   align-items: center;
   margin-top: 1.125rem;
@@ -1027,7 +1032,7 @@ a {
   }
 
   .faq-photo {
-    width: min(100%, 12rem);
+    width: min(100%, 14rem);
   }
 
   .requests-intro {
