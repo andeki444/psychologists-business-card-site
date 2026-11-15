@@ -1,5 +1,19 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 
+const contactSection = document.getElementById("contact");
+const questions = document.getElementById("topic-choices");
+
+questions.addEventListener("change", (event) => {
+  if (!event.target.checked) return;
+
+  if (window.location.hash !== "#contact") {
+    window.location.hash = "contact";
+  }
+
+  contactSection.focus({ preventScroll: true });
+  contactSection.scrollIntoView({ block: "start" });
+});
+
 const paintedSections = document.querySelectorAll(".painted");
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const rootStyle = document.documentElement.style;

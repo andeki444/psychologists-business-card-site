@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fbfaf8">
+  <meta name="theme-color" content="#fcfbf8">
   <meta name="description" content="Полина Киселёва — психолог-консультант. Встречи онлайн и в Симферополе. Первая встреча-знакомство — бесплатно.">
   <title>Полина Киселёва — психолог-консультант</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Source+Sans+3:wght@400..700&display=swap">
-  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..600;1,500&family=Raleway:wght@400..700&display=swap">
+  <link rel="stylesheet" href="assets/site.css?v=paper-card">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">К содержанию</a>
@@ -32,50 +32,73 @@
 
   <main id="main" tabindex="-1">
     <section class="hero painted" aria-labelledby="hero-title">
-      <div class="wrap hero-layout">
+      <div class="wrap hero-layout ink-frame">
         <div class="hero-copy">
           <p class="hero-kicker">Психолог-консультант <span>Онлайн и в Симферополе</span></p>
-          <h1 id="hero-title">Как ты <em>сейчас?</em></h1>
+          <h1 id="hero-title">Как ты <em class="address ink-underline">сейчас?</em></h1>
           <p class="hero-lead">Привет, я Полина Киселёва. Здесь можно говорить о том, что трудно держать в себе. В своём темпе, без оценки и спешки.</p>
-          <div class="hero-actions">
-            <a class="button" href="https://t.me/polisha1703" target="_blank" rel="noopener noreferrer">
-              Записаться на знакомство <span class="button-arrow" aria-hidden="true">↗</span>
-            </a>
-            <span class="hero-note">30 минут онлайн · бесплатно</span>
-          </div>
         </div>
         <figure class="hero-photo">
           <img src="assets/polina-portrait.jpg" alt="Полина Киселёва, психолог-консультант" width="837" height="1115" fetchpriority="high">
-          <figcaption>Позволь себе чувствовать.<br>Давай говорить об этом.</figcaption>
+          <figcaption class="address">Позволь себе чувствовать.<br>Давай говорить об этом.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="requests painted" id="requests" aria-labelledby="requests-title">
-      <div class="wrap requests-layout">
+      <div class="wrap">
         <div class="requests-intro">
-          <h2 id="requests-title">С чем можно<br class="wide-break"> прийти</h2>
-          <p>Необязательно точно знать, как назвать своё состояние. Начать можно с того, что волнует сегодня.</p>
+          <div>
+            <h2 id="requests-title" class="address"><span class="ink-underline">Если внутри сейчас…</span></h2>
+            <p id="topic-instructions">Отметь вопрос, который тебе откликается, чтобы перейти к контактам.</p>
+          </div>
           <img class="thread-person" src="assets/thread-person.svg" alt="" width="600" height="520" decoding="async">
         </div>
-        <div class="requests-topics">
-          <ul class="topic-list">
-            <li>Тревога и внутреннее напряжение</li>
-            <li>Усталость и эмоциональное выгорание</li>
-            <li>Сложные чувства: стыд, вина, злость</li>
-            <li>Трудно сделать выбор или принять решение</li>
-            <li>Непросто в отношениях с другими</li>
-            <li>Хочется лучше понять и принять себя</li>
-          </ul>
-          <a class="text-link" href="#contact">Сделать первый шаг <span aria-hidden="true">↗</span></a>
-        </div>
+        <ul class="topic-list address" id="topic-choices">
+          <li>
+            <label>
+              <input type="checkbox" aria-describedby="topic-instructions">
+              <span>Чувствуешь тревогу или внутреннее напряжение?</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" aria-describedby="topic-instructions">
+              <span>Устаёшь и чувствуешь, что выгораешь?</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" aria-describedby="topic-instructions">
+              <span>Сложно справляться со стыдом, виной или злостью?</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" aria-describedby="topic-instructions">
+              <span>Трудно сделать выбор или принять решение?</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" aria-describedby="topic-instructions">
+              <span>Непросто в отношениях с другими?</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" aria-describedby="topic-instructions">
+              <span>Хочется лучше понять и принять себя?</span>
+            </label>
+          </li>
+        </ul>
       </div>
     </section>
 
     <section class="format painted" id="format" aria-labelledby="format-title">
       <div class="wrap format-layout">
         <div class="format-intro">
-          <h2 id="format-title">Формат и<br class="wide-break"> стоимость</h2>
+          <h2 id="format-title">Как мы можем работать</h2>
           <p>Онлайн из любого удобного места или очно в кабинете в Симферополе. Формат, который подходит тебе, обсудим при знакомстве.</p>
           <p class="format-note"><strong>Важно:</strong> сейчас я работаю со взрослыми от 18 лет. Не беру в работу ПТСР, зависимости и психиатрические диагнозы.</p>
         </div>
@@ -108,24 +131,24 @@
     <section class="faq painted" id="faq" aria-labelledby="faq-title">
       <div class="wrap faq-layout">
         <div class="faq-intro">
-          <h2 id="faq-title">Вопросы перед<br class="wide-break"> первой встречей</h2>
+          <h2 id="faq-title" class="address"><span class="ink-underline">Можно спросить</span></h2>
           <p>Если страшно или пока непонятно, с чего начать, это нормально.</p>
         </div>
         <div class="faq-list">
           <details>
-            <summary>Зачем нужна бесплатная встреча?</summary>
+            <summary class="address">Зачем нужна бесплатная встреча?</summary>
             <p>За 30 минут мы познакомимся, поговорим о твоём запросе и поймём, комфортно ли нам работать вместе. Встреча ни к чему тебя не обязывает.</p>
           </details>
           <details>
-            <summary>А если я не могу сформулировать запрос?</summary>
+            <summary class="address">А если я не могу сформулировать запрос?</summary>
             <p>Можно прийти без готовых слов. Начнём с того, что беспокоит прямо сейчас, и постепенно разберёмся вместе.</p>
           </details>
           <details>
-            <summary>Что, если мне трудно открыться?</summary>
+            <summary class="address">Что, если мне трудно открыться?</summary>
             <p>Доверие появляется постепенно. Ты сам(а) выбираешь, о чём и сколько говорить. Мы можем обсудить и само это чувство.</p>
           </details>
           <details>
-            <summary>Сколько встреч мне понадобится?</summary>
+            <summary class="address">Сколько встреч мне понадобится?</summary>
             <p>Это индивидуально и зависит от твоего запроса. После знакомства мы обсудим, с чем будем работать и как двигаться дальше.</p>
           </details>
         </div>
@@ -134,23 +157,23 @@
 
     <section class="about painted" id="about" aria-labelledby="about-title">
       <div class="wrap about-layout">
-        <div class="about-copy">
+        <figure class="about-photo">
+          <img src="assets/polina-at-work.jpg" alt="Полина делает записи во время учёбы" width="794" height="1059" loading="lazy" decoding="async">
+        </figure>
+        <div class="about-copy ink-frame">
           <h2 id="about-title">Немного обо мне</h2>
           <p>Я учусь в Московском институте психологии и продолжаю развивать практику при поддержке опытных наставников. В работе для меня важны бережность, честность и живой контакт.</p>
           <p class="credential">50 часов практики, личная терапия, регулярные супервизии и интервизии.</p>
         </div>
-        <figure class="about-photo">
-          <img src="assets/polina-at-work.jpg" alt="Полина делает записи во время учёбы" width="794" height="1059" loading="lazy" decoding="async">
-        </figure>
       </div>
     </section>
   </main>
 
-  <footer class="contact painted" id="contact" aria-labelledby="contact-title">
+  <footer class="contact painted" id="contact" tabindex="-1" aria-labelledby="contact-title">
     <div class="wrap">
-      <div class="contact-layout">
+      <div class="contact-layout ink-frame">
         <div>
-          <h2 id="contact-title">Давай познакомимся</h2>
+          <h2 id="contact-title" class="address"><span class="ink-underline">Первый шаг может быть простым.</span></h2>
           <p>Напиши мне удобным способом. Договоримся о бесплатной встрече.</p>
         </div>
         <address class="contact-links">
@@ -174,6 +197,6 @@
       <div class="footer-bottom">© <span id="year">2026</span> Полина Киселёва · психолог-консультант</div>
     </div>
   </footer>
-  <script src="assets/site.js" defer></script>
+  <script src="assets/site.js?v=paper-card" defer></script>
 </body>
 </html>
