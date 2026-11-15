@@ -1,18 +1,44 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 
-const contactSection = document.getElementById("contact");
 const questions = document.getElementById("topic-choices");
+const requestReview = document.getElementById("request-review");
+const selectedTopicsList = document.getElementById("selected-topics");
+const telegramLink = document.getElementById("telegram-request");
+const telegramChat = telegramLink.href;
 
-questions.addEventListener("change", (event) => {
-  if (!event.target.checked) return;
+function getSelectedTopics() {
+  return Array.from(questions.querySelectorAll("input:checked"), input => input.value);
+}
 
-  if (window.location.hash !== "#contact") {
-    window.location.hash = "contact";
+function updateReview() {
+  const topics = getSelectedTopics();
+  const items = topics.map(topic => {
+    const item = document.createElement("li");
+    item.textContent = topic;
+    return item;
+  });
+
+  selectedTopicsList.replaceChildren(...items);
+  requestReview.hidden = topics.length === 0;
+  telegramLink.href = telegramChat;
+}
+
+telegramLink.addEventListener("click", () => {
+  const draft = new URL(telegramChat);
+  const topics = getSelectedTopics();
+  const lines = ["Здравствуйте, Полина! Хочу договориться о первой встрече."];
+
+  if (topics.length > 0) {
+    lines.push("", "Темы, которые хочу обсудить:", ...topics.map(topic => "• " + topic));
   }
 
-  contactSection.focus({ preventScroll: true });
-  contactSection.scrollIntoView({ block: "start" });
+  draft.search = "text=" + encodeURIComponent(lines.join("\n"));
+  telegramLink.href = draft.href;
 });
+
+questions.addEventListener("change", updateReview);
+window.addEventListener("pageshow", updateReview);
+updateReview();
 
 const paintedSections = document.querySelectorAll(".painted");
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");

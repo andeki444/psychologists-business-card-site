@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..600;1,500&family=Raleway:wght@400..700&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=paper-card">
+  <link rel="stylesheet" href="assets/site.css?v=graphite">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">К содержанию</a>
@@ -25,73 +25,76 @@
         <a class="header-section" href="#requests">С чем можно прийти</a>
         <a class="header-section" href="#format">Формат и стоимость</a>
         <a class="header-section" href="#about">Обо мне</a>
-        <a class="header-contact" href="#contact">Связаться <span aria-hidden="true">↗</span></a>
+        <a class="header-contact" href="#contact">Связаться <span aria-hidden="true">↓</span></a>
       </nav>
     </div>
   </header>
 
   <main id="main" tabindex="-1">
-    <section class="hero painted" aria-labelledby="hero-title">
-      <div class="wrap hero-layout ink-frame">
-        <div class="hero-copy">
+    <section class="hero painted bookend" aria-labelledby="hero-title">
+      <div class="wrap hero-layout bookend-layout">
+        <div class="hero-copy bookend-copy">
           <p class="hero-kicker">Психолог-консультант <span>Онлайн и в Симферополе</span></p>
           <h1 id="hero-title">Как ты <em class="address ink-underline">сейчас?</em></h1>
           <p class="hero-lead">Привет, я Полина Киселёва. Здесь можно говорить о том, что трудно держать в себе. В своём темпе, без оценки и спешки.</p>
         </div>
-        <figure class="hero-photo">
-          <img src="assets/polina-portrait.jpg" alt="Полина Киселёва, психолог-консультант" width="837" height="1115" fetchpriority="high">
-          <figcaption class="address">Позволь себе чувствовать.<br>Давай говорить об этом.</figcaption>
-        </figure>
+        <div class="hero-art">
+          <img class="thread-person" src="assets/thread-person.svg" alt="" width="600" height="520" decoding="async">
+          <figure class="hero-photo">
+            <img src="assets/polina-portrait.jpg" alt="Полина Киселёва, психолог-консультант" width="837" height="1115" fetchpriority="high">
+            <figcaption class="address">Позволь себе чувствовать.<br>Давай говорить об этом.</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
-    <section class="requests painted" id="requests" aria-labelledby="requests-title">
+    <section class="requests painted" id="requests" tabindex="-1" aria-labelledby="requests-title">
       <div class="wrap">
         <div class="requests-intro">
-          <div>
-            <h2 id="requests-title" class="address"><span class="ink-underline">Если внутри сейчас…</span></h2>
-            <p id="topic-instructions">Отметь вопрос, который тебе откликается, чтобы перейти к контактам.</p>
-          </div>
-          <img class="thread-person" src="assets/thread-person.svg" alt="" width="600" height="520" decoding="async">
+          <h2 id="requests-title" class="address"><span class="ink-underline">Если внутри сейчас…</span></h2>
+          <p id="topic-instructions">Отметь всё, что тебе откликается, и нажми «Дальше».</p>
         </div>
         <ul class="topic-list address" id="topic-choices">
           <li>
             <label>
-              <input type="checkbox" aria-describedby="topic-instructions">
+              <input type="checkbox" value="Тревога и внутреннее напряжение" aria-describedby="topic-instructions">
               <span>Чувствуешь тревогу или внутреннее напряжение?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" aria-describedby="topic-instructions">
+              <input type="checkbox" value="Усталость и выгорание" aria-describedby="topic-instructions">
               <span>Устаёшь и чувствуешь, что выгораешь?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" aria-describedby="topic-instructions">
+              <input type="checkbox" value="Стыд, вина или злость" aria-describedby="topic-instructions">
               <span>Сложно справляться со стыдом, виной или злостью?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" aria-describedby="topic-instructions">
+              <input type="checkbox" value="Сложности с выбором и принятием решений" aria-describedby="topic-instructions">
               <span>Трудно сделать выбор или принять решение?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" aria-describedby="topic-instructions">
+              <input type="checkbox" value="Отношения с другими" aria-describedby="topic-instructions">
               <span>Непросто в отношениях с другими?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" aria-describedby="topic-instructions">
+              <input type="checkbox" value="Понимание и принятие себя" aria-describedby="topic-instructions">
               <span>Хочется лучше понять и принять себя?</span>
             </label>
           </li>
         </ul>
+        <div class="topic-actions">
+          <a class="primary-action" href="#contact" aria-label="Дальше, к контактам">Дальше <span aria-hidden="true">↓</span></a>
+        </div>
       </div>
     </section>
 
@@ -169,34 +172,44 @@
     </section>
   </main>
 
-  <footer class="contact painted" id="contact" tabindex="-1" aria-labelledby="contact-title">
+  <footer class="contact painted bookend" id="contact" tabindex="-1" aria-labelledby="contact-title">
     <div class="wrap">
-      <div class="contact-layout ink-frame">
-        <div>
-          <h2 id="contact-title" class="address"><span class="ink-underline">Первый шаг может быть простым.</span></h2>
-          <p>Напиши мне удобным способом. Договоримся о бесплатной встрече.</p>
+      <div class="contact-layout bookend-layout">
+        <div class="contact-intro bookend-copy">
+          <h2 id="contact-title">Напиши, <em class="address ink-underline">договоримся.</em></h2>
+          <p>Можем начать с бесплатной встречи-знакомства онлайн.</p>
         </div>
-        <address class="contact-links">
-          <a href="https://t.me/polisha1703" target="_blank" rel="noopener noreferrer">
-            <span class="contact-label">Telegram</span>
-            <span class="contact-value">@polisha1703</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-          <a href="tel:+79787509650">
-            <span class="contact-label">Телефон</span>
-            <span class="contact-value">+7 978 750-96-50</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-          <a href="mailto:Kiseleva10112014@yandex.ru">
-            <span class="contact-label">Почта</span>
-            <span class="contact-value">Kiseleva10112014@yandex.ru</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        </address>
+        <div class="contact-card">
+          <section class="request-review" id="request-review" aria-labelledby="review-title" hidden>
+            <div class="review-heading">
+              <h3 id="review-title">Темы для встречи</h3>
+              <a href="#requests">Изменить выбор</a>
+            </div>
+            <ul id="selected-topics"></ul>
+          </section>
+          <div class="telegram-action">
+            <a class="primary-action" id="telegram-request" href="https://t.me/polisha1703" target="_blank" rel="noopener noreferrer" aria-describedby="telegram-note">
+              Написать в Telegram <span aria-hidden="true">↗</span>
+            </a>
+            <p id="telegram-note">В чате откроется черновик. Его можно изменить перед отправкой.</p>
+          </div>
+          <address class="contact-links">
+            <a href="tel:+79787509650">
+              <span class="contact-label">Телефон</span>
+              <span class="contact-value">+7 978 750-96-50</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a href="mailto:Kiseleva10112014@yandex.ru">
+              <span class="contact-label">Почта</span>
+              <span class="contact-value">Kiseleva10112014@yandex.ru</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </address>
+        </div>
       </div>
       <div class="footer-bottom">© <span id="year">2026</span> Полина Киселёва · психолог-консультант</div>
     </div>
   </footer>
-  <script src="assets/site.js?v=paper-card" defer></script>
+  <script src="assets/site.js?v=graphite" defer></script>
 </body>
 </html>
