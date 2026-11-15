@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..600;1,500&family=Raleway:wght@400..700&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=graphite">
+  <link rel="stylesheet" href="assets/site.css?v=brief">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">К содержанию</a>
@@ -34,65 +34,75 @@
     <section class="hero painted bookend" aria-labelledby="hero-title">
       <div class="wrap hero-layout bookend-layout">
         <div class="hero-copy bookend-copy">
-          <p class="hero-kicker">Психолог-консультант <span>Онлайн и в Симферополе</span></p>
           <h1 id="hero-title">Как ты <em class="address ink-underline">сейчас?</em></h1>
-          <p class="hero-lead">Привет, я Полина Киселёва. Здесь можно говорить о том, что трудно держать в себе. В своём темпе, без оценки и спешки.</p>
+          <p class="hero-lead">ПРИВЕТ, Я – Полина Киселёва!<span>ТВОЙ ПСИХОЛОГ-КОНСУЛЬТАНТ</span></p>
         </div>
-        <div class="hero-art">
+        <figure class="hero-art">
+          <div class="hero-photo-grid">
+            <img class="hero-portrait" src="assets/polina-portrait.jpg" alt="Портрет Полины Киселёвой" width="837" height="1115" fetchpriority="high">
+            <div class="hero-photo-pair">
+              <img class="hero-photo-light" src="assets/polina-in-studio.jpg" alt="Полина Киселёва в светлой студии" width="914" height="1219" decoding="async">
+              <img class="hero-photo-work" src="assets/polina-at-work.jpg" alt="Полина Киселёва за учебными записями" width="794" height="1059" decoding="async">
+            </div>
+          </div>
           <img class="thread-person" src="assets/thread-person.svg" alt="" width="600" height="520" decoding="async">
-          <figure class="hero-photo">
-            <img src="assets/polina-portrait.jpg" alt="Полина Киселёва, психолог-консультант" width="837" height="1115" fetchpriority="high">
-            <figcaption class="address">Позволь себе чувствовать.<br>Давай говорить об этом.</figcaption>
-          </figure>
-        </div>
+          <figcaption class="address">ПОЗВОЛЬ СЕБЕ ЧУВСТВОВАТЬ! ДАВАЙ ГОВОРИТЬ ОБ ЭТОМ….. ТЫ В БЕЗОПАСНОСТИ!</figcaption>
+        </figure>
       </div>
     </section>
 
     <section class="requests painted" id="requests" tabindex="-1" aria-labelledby="requests-title">
       <div class="wrap">
         <div class="requests-intro">
-          <h2 id="requests-title" class="address"><span class="ink-underline">Если внутри сейчас…</span></h2>
+          <h2 id="requests-title" class="address section-hatched"><span class="ink-underline">КАК ТЫ СЕЙЧАС?</span></h2>
           <p id="topic-instructions">Отметь всё, что тебе откликается, и нажми «Дальше».</p>
         </div>
         <ul class="topic-list address" id="topic-choices">
           <li>
             <label>
               <input type="checkbox" value="Тревога и внутреннее напряжение" aria-describedby="topic-instructions">
-              <span>Чувствуешь тревогу или внутреннее напряжение?</span>
+              <span>У тебя чувство тревоги и внутреннего напряжения?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" value="Усталость и выгорание" aria-describedby="topic-instructions">
-              <span>Устаёшь и чувствуешь, что выгораешь?</span>
+              <input type="checkbox" value="Эмоциональное выгорание" aria-describedby="topic-instructions">
+              <span>Столкнулась (-лся) с эмоциональным выгоранием?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" value="Стыд, вина или злость" aria-describedby="topic-instructions">
-              <span>Сложно справляться со стыдом, виной или злостью?</span>
+              <input type="checkbox" value="Сложные чувства и внутренние переживания" aria-describedby="topic-instructions">
+              <span>Испытываешь сложные чувства (стыд, вина, злость и тп) или не понимаешь, что гложет внутри и мешает жить?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" value="Сложности с выбором и принятием решений" aria-describedby="topic-instructions">
+              <input type="checkbox" value="Трудности с выбором или принятием решения" aria-describedby="topic-instructions">
               <span>Трудно сделать выбор или принять решение?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" value="Отношения с другими" aria-describedby="topic-instructions">
-              <span>Непросто в отношениях с другими?</span>
+              <input type="checkbox" value="Отношения" aria-describedby="topic-instructions">
+              <span>Проблемы в отношениях, а может их просто нет?</span>
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" value="Понимание и принятие себя" aria-describedby="topic-instructions">
-              <span>Хочется лучше понять и принять себя?</span>
+              <input type="checkbox" value="Неуверенность, самопринятие и страх" aria-describedby="topic-instructions">
+              <span>Не уверен (а) в себе или не можешь себя принять, испытываешь страх?</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" value="Утрата или поиск смысла" aria-describedby="topic-instructions">
+              <span>Утратил (а) смысл или пытаетесь его найти?</span>
             </label>
           </li>
         </ul>
         <div class="topic-actions">
+          <p class="address">ДАВАЙ НАЙДЕМ ОТВЕТЫ ВМЕСТЕ!</p>
           <a class="primary-action" href="#contact" aria-label="Дальше, к контактам">Дальше <span aria-hidden="true">↓</span></a>
         </div>
       </div>
@@ -101,32 +111,15 @@
     <section class="format painted" id="format" aria-labelledby="format-title">
       <div class="wrap format-layout">
         <div class="format-intro">
-          <h2 id="format-title">Как мы можем работать</h2>
-          <p>Онлайн из любого удобного места или очно в кабинете в Симферополе. Формат, который подходит тебе, обсудим при знакомстве.</p>
-          <p class="format-note"><strong>Важно:</strong> сейчас я работаю со взрослыми от 18 лет. Не беру в работу ПТСР, зависимости и психиатрические диагнозы.</p>
+          <h2 id="format-title" class="section-hatched">Формат работы и стоимость</h2>
+          <p>Встречи онлайн/Оффлайн (Крым, Симферополь)</p>
+          <p class="format-note"><strong>ВАЖНО:</strong> Сейчас я не работаю с ПТСР, с подростками (младше 18 лет), зависимостями и психиатрическими диагнозами</p>
         </div>
         <div class="price-list" role="group" aria-label="Стоимость консультаций">
-          <div class="price-row">
-            <div>
-              <h3>Первая встреча — знакомство</h3>
-              <p>30 минут · онлайн</p>
-            </div>
-            <p class="price-amount"><strong>Бесплатно</strong></p>
-          </div>
-          <div class="price-row">
-            <div>
-              <h3>Следующие три встречи</h3>
-              <p>50 минут</p>
-            </div>
-            <p class="price-amount"><strong>1 500 ₽</strong> онлайн <span>Очно — 2 000 ₽</span></p>
-          </div>
-          <div class="price-row">
-            <div>
-              <h3>С пятой встречи</h3>
-              <p>50 минут</p>
-            </div>
-            <p class="price-amount"><strong>2 000 ₽</strong> онлайн <span>Очно — 2 500 ₽</span></p>
-          </div>
+          <p class="price-detail">Первая сессия - «Знакомство» - 30 минут/Бесплатно (в онлайн формате)</p>
+          <p class="price-detail">Следующие три сессии по специальной стоимости – 1500 руб (онлайн)/ 2000 руб (в кабинете) - 50 минут</p>
+          <p class="price-detail">С пятой сессии - 2000 руб (онлайн)/ 2500 руб (в кабинете) - 50 минут</p>
+          <p class="price-detail address">Как тебе будет комфортнее? Обсудим при Знакомстве.</p>
         </div>
       </div>
     </section>
@@ -134,25 +127,38 @@
     <section class="faq painted" id="faq" aria-labelledby="faq-title">
       <div class="wrap faq-layout">
         <div class="faq-intro">
-          <h2 id="faq-title" class="address"><span class="ink-underline">Можно спросить</span></h2>
-          <p>Если страшно или пока непонятно, с чего начать, это нормально.</p>
+          <h2 id="faq-title" class="address section-hatched">ТУТ МОГУТ БЫТЬ ОТВЕТЫ НА ТВОИ ВОПРОСЫ:</h2>
+          <p>Вот подборка самых частых страхов и вопросов, с которыми Ты возможно уже столкнулся (лась) перед первой сессией.</p>
         </div>
         <div class="faq-list">
           <details>
-            <summary class="address">Зачем нужна бесплатная встреча?</summary>
-            <p>За 30 минут мы познакомимся, поговорим о твоём запросе и поймём, комфортно ли нам работать вместе. Встреча ни к чему тебя не обязывает.</p>
+            <summary class="address">Почему первая встреча короткая и бесплатная?</summary>
+            <p>Все логично и просто, первая сессия – наше знакомство. Это ознакомительный формат (обычно 30 минут), чтобы мы могли познакомиться, обсудить Твой запрос и понять, комфортно ли нам будет работать вместе. Это ни к чему Тебя не обязывает, но помогает безопасно сделать первый шаг и снять напряжение перед началом нашей работы.</p>
           </details>
           <details>
-            <summary class="address">А если я не могу сформулировать запрос?</summary>
-            <p>Можно прийти без готовых слов. Начнём с того, что беспокоит прямо сейчас, и постепенно разберёмся вместе.</p>
+            <summary class="address">Вдруг психолог осудит меня за мои мысли, слабости или поступки?</summary>
+            <p>Наше пространство — это пространство абсолютной безопасности и конфиденциальности. Здесь нет оценок «хорошо» или «плохо», «правильно» или «стыдно». Я рядом не для того, чтобы оценивать, а чтобы понять Тебя и помочь.</p>
           </details>
           <details>
-            <summary class="address">Что, если мне трудно открыться?</summary>
-            <p>Доверие появляется постепенно. Ты сам(а) выбираешь, о чём и сколько говорить. Мы можем обсудить и само это чувство.</p>
+            <summary class="address">С чего начинать первую встречу, если я даже не знаю, как сформулировать проблему?</summary>
+            <p>Совершенно нормально прийти без «диагноза» или четкой формулировки запроса. Достаточно начать говорить. Можем начать с того, что болит или тревожит прямо сейчас. Я помогу бережно распутать этот внутренний клубочек.</p>
           </details>
           <details>
-            <summary class="address">Сколько встреч мне понадобится?</summary>
-            <p>Это индивидуально и зависит от твоего запроса. После знакомства мы обсудим, с чем будем работать и как двигаться дальше.</p>
+            <summary class="address">Мне страшно и стыдно открывать душу незнакомому человеку.</summary>
+            <p>Отношения «психолог/клиент» - это тоже отношения. Доверие строится постепенно, и это абсолютно естественно. Ты сам (а) управляешь темпом и глубиной разговора — можно делиться ровно тем, к чему Ты готов (а) сегодня. Я не буду торопить и давить, но постараюсь быть мягко-честной и бережно подсвечивать то, что могло остаться не замеченным.</p>
+          </details>
+          <details>
+            <summary class="address">А вдруг после сессии мне станет хуже, поднятые темы ранят меня?</summary>
+            <p>В терапии действительно могут подниматься глубокие, скрытые чувства, и в моменте может быть грустно или тяжело. Это нормальная и важная часть проживания опыта. Рядом будет бережный проводник - Я, который поможет справиться с эмоциями и вернет ощущение опоры. Я не оставлю Тебя в этом, для этого я тут.</p>
+          </details>
+          <details>
+            <summary class="address">А вдруг мне вообще не поможет, и я зря потрачу время и силы?</summary>
+            <p>Психотерапия — это совместная работа и путь навстречу себе. Результат зависит от нашего контакта и готовности к изменениям. И даже если Ты заметишь сопротивление («психолог меня злит» и/или «не хочу идти на сессию/забыл о ней») или сомнения, их тоже можно и нужно обсудить на сессии — это важный шаг в терапии и отличная точка для роста.</p>
+            <p>Тут обязательно знать! – «хочешь уйти из терапии/злит или раздражает психолог?», или наоборот, «так не хочется говорить ему правду, лучше промолчу»? - скажи мне об этом! Это тоже важно! мы обсудим это вместе без осуждения и решим, как сейчас было бы лучше для именно Тебя.</p>
+          </details>
+          <details>
+            <summary class="address">Сколько сессий понадобится, чтобы решить мою проблему?</summary>
+            <p>Тут всё очень индивидуально, ведь особенности психики у каждого свои, кто-то готов к быстрым решениям и переменам, ии, например, запрос не глубок и не требует глубинной проработки, тут может стать достаточным провести нескольких встреч и получить ясность. Для кого-то запрос связан с глубинными изменениями, они требуют больше времени для исследования и готовности к этому и тут мы будем двигаться бережно, ровно туда, где Ты уже готов (а), в моменте «здесь и сейчас». Важно то, что мы точно будем знать к чему и зачем идем.</p>
           </details>
         </div>
       </div>
@@ -164,9 +170,8 @@
           <img src="assets/polina-at-work.jpg" alt="Полина делает записи во время учёбы" width="794" height="1059" loading="lazy" decoding="async">
         </figure>
         <div class="about-copy ink-frame">
-          <h2 id="about-title">Немного обо мне</h2>
-          <p>Я учусь в Московском институте психологии и продолжаю развивать практику при поддержке опытных наставников. В работе для меня важны бережность, честность и живой контакт.</p>
-          <p class="credential">50 часов практики, личная терапия, регулярные супервизии и интервизии.</p>
+          <h2 id="about-title" class="section-hatched">НЕМНОГО ОБО МНЕ:</h2>
+          <p>Обучение в Московском Институте Психологии (МИП), сертификат на 50 часов практики, личные часы терапии, регулярные посещения супервизий и интервизий у опытных наставников</p>
         </div>
       </div>
     </section>
@@ -176,8 +181,8 @@
     <div class="wrap">
       <div class="contact-layout bookend-layout">
         <div class="contact-intro bookend-copy">
-          <h2 id="contact-title">Напиши, <em class="address ink-underline">договоримся.</em></h2>
-          <p>Можем начать с бесплатной встречи-знакомства онлайн.</p>
+          <h2 id="contact-title" class="address">Я ВСЕГДА ЗДЕСЬ:</h2>
+          <p>Напиши, договоримся о первой встрече.</p>
         </div>
         <div class="contact-card">
           <section class="request-review" id="request-review" aria-labelledby="review-title" hidden>
@@ -196,7 +201,7 @@
           <address class="contact-links">
             <a href="tel:+79787509650">
               <span class="contact-label">Телефон</span>
-              <span class="contact-value">+7 978 750-96-50</span>
+              <span class="contact-value">8 978 750 96 50</span>
               <span aria-hidden="true">↗</span>
             </a>
             <a href="mailto:Kiseleva10112014@yandex.ru">
