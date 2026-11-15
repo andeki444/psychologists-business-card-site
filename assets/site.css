@@ -320,9 +320,9 @@ a {
 .hero-photo-grid {
   display: grid;
   grid-column: 1 / -1;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
-  gap: clamp(.4rem, 1.25vw, .8rem);
-  aspect-ratio: 1.52;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+  align-items: center;
+  gap: clamp(.45rem, 1.35vw, .95rem);
 }
 
 .hero-photo-grid img, .about-photo img {
@@ -332,17 +332,17 @@ a {
 }
 
 .hero-photo-grid img {
-  min-height: 0;
-  height: 100%;
+  height: auto;
 }
 
 .hero-portrait {
+  aspect-ratio: 5 / 6;
   object-position: center 43%;
 }
 
 .hero-photo-light {
-  object-position: 65% 39%;
-  border: 3px solid #fffdfa;
+  aspect-ratio: 4 / 5;
+  object-position: 65% 42%;
 }
 
 .hero-art figcaption {
