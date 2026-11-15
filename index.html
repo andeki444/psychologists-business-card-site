@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fcfbf8">
+  <meta name="theme-color" content="#F9F7F2">
   <meta name="description" content="Полина Киселёва — психолог-консультант. Встречи онлайн и в Симферополе. Первая встреча-знакомство — бесплатно.">
   <title>Полина Киселёва — психолог-консультант</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..600;1,500&family=Raleway:wght@400..700&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=photo-layout">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600..700&family=Rubik:wght@400..700&display=swap">
+  <link rel="stylesheet" href="assets/site.css?v=printed-card">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">К содержанию</a>
@@ -34,15 +34,12 @@
     <section class="hero painted bookend" aria-labelledby="hero-title">
       <div class="wrap hero-layout bookend-layout">
         <div class="hero-copy bookend-copy">
-          <h1 id="hero-title">Как ты <em class="address ink-underline">сейчас?</em></h1>
+          <h1 id="hero-title">Как ты <span class="ink-underline">сейчас?</span></h1>
           <p class="hero-lead">ПРИВЕТ, Я – Полина Киселёва!<span>ТВОЙ ПСИХОЛОГ-КОНСУЛЬТАНТ</span></p>
         </div>
         <figure class="hero-art">
-          <div class="hero-photo-grid">
-            <img class="hero-portrait" src="assets/polina-portrait.jpg" alt="Портрет Полины Киселёвой" width="837" height="1115" fetchpriority="high">
-            <img class="hero-photo-light" src="assets/polina-in-studio.jpg" alt="Полина Киселёва в светлой студии" width="914" height="1219" decoding="async">
-          </div>
-          <img class="thread-person" src="assets/thread-person.svg" alt="" width="600" height="520" decoding="async">
+          <img class="hero-thread" src="assets/card-thread.svg" alt="" width="160" height="408" decoding="async">
+          <img class="hero-portrait" src="assets/polina-portrait.jpg" alt="Портрет Полины Киселёвой" width="837" height="1115" fetchpriority="high">
           <figcaption class="address">ПОЗВОЛЬ СЕБЕ ЧУВСТВОВАТЬ! ДАВАЙ ГОВОРИТЬ ОБ ЭТОМ….. ТЫ В БЕЗОПАСНОСТИ!</figcaption>
         </figure>
       </div>
@@ -51,7 +48,7 @@
     <section class="requests painted" id="requests" tabindex="-1" aria-labelledby="requests-title">
       <div class="wrap">
         <div class="requests-intro">
-          <h2 id="requests-title" class="address section-hatched"><span class="ink-underline">КАК ТЫ СЕЙЧАС?</span></h2>
+          <h2 id="requests-title" class="section-hatched lettering-title"><span class="ink-underline">КАК ТЫ СЕЙЧАС?</span></h2>
           <p id="topic-instructions">Отметь всё, что тебе откликается, и нажми «Дальше».</p>
         </div>
         <ul class="topic-list address" id="topic-choices">
@@ -91,11 +88,22 @@
               <span>Не уверен (а) в себе или не можешь себя принять, испытываешь страх?</span>
             </label>
           </li>
-          <li>
+          <li class="topic-wide">
             <label>
               <input type="checkbox" value="Утрата или поиск смысла" aria-describedby="topic-instructions">
               <span>Утратил (а) смысл или пытаетесь его найти?</span>
             </label>
+          </li>
+          <li class="topic-wide topic-other">
+            <label>
+              <input type="checkbox" id="other-topic" value="Другая тема" aria-controls="other-topic-fields" aria-describedby="topic-instructions">
+              <span>Не нашёл своего запроса? Тогда расскажи мне о нём.</span>
+            </label>
+            <div class="topic-other-fields" id="other-topic-fields" hidden>
+              <label for="other-topic-text">Твой запрос</label>
+              <textarea id="other-topic-text" rows="3" maxlength="240" aria-describedby="other-topic-hint"></textarea>
+              <p id="other-topic-hint">До 240 символов. Подробности можно дописать в Telegram.</p>
+            </div>
           </li>
         </ul>
         <div class="topic-actions">
@@ -162,13 +170,15 @@
     </section>
 
     <section class="about painted" id="about" aria-labelledby="about-title">
-      <div class="wrap about-layout">
-        <figure class="about-photo">
-          <img src="assets/polina-at-work.jpg" alt="Полина делает записи во время учёбы" width="794" height="1059" loading="lazy" decoding="async">
-        </figure>
-        <div class="about-copy ink-frame">
-          <h2 id="about-title" class="section-hatched">НЕМНОГО ОБО МНЕ:</h2>
-          <p>Обучение в Московском Институте Психологии (МИП), сертификат на 50 часов практики, личные часы терапии, регулярные посещения супервизий и интервизий у опытных наставников</p>
+      <div class="wrap">
+        <h2 id="about-title" class="section-hatched">НЕМНОГО ОБО МНЕ:</h2>
+        <div class="about-layout">
+          <figure class="about-photo">
+            <img src="assets/polina-about-portrait.jpg" alt="Полина Киселёва улыбается, сидя на стуле" width="960" height="1280" loading="lazy" decoding="async">
+          </figure>
+          <div class="about-copy ink-frame">
+            <p>Обучение в Московском Институте Психологии (МИП), сертификат на 50 часов практики, личные часы терапии, регулярные посещения супервизий и интервизий у опытных наставников</p>
+          </div>
         </div>
       </div>
     </section>
@@ -212,6 +222,6 @@
       <div class="footer-bottom">© <span id="year">2026</span> Полина Киселёва · психолог-консультант</div>
     </div>
   </footer>
-  <script src="assets/site.js?v=graphite" defer></script>
+  <script src="assets/site.js?v=printed-card" defer></script>
 </body>
 </html>

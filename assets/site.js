@@ -1,16 +1,24 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 
 const questions = document.getElementById("topic-choices");
+const otherTopic = document.getElementById("other-topic");
+const otherTopicFields = document.getElementById("other-topic-fields");
+const otherTopicText = document.getElementById("other-topic-text");
 const requestReview = document.getElementById("request-review");
 const selectedTopicsList = document.getElementById("selected-topics");
 const telegramLink = document.getElementById("telegram-request");
 const telegramChat = telegramLink.href;
 
 function getSelectedTopics() {
-  return Array.from(questions.querySelectorAll("input:checked"), input => input.value);
+  return Array.from(questions.querySelectorAll("input:checked"), input => {
+    const description = input === otherTopic ? otherTopicText.value.trim() : "";
+    return description ? input.value + " — " + description : input.value;
+  });
 }
 
 function updateReview() {
+  otherTopicFields.hidden = !otherTopic.checked;
+
   const topics = getSelectedTopics();
   const items = topics.map(topic => {
     const item = document.createElement("li");
@@ -32,11 +40,13 @@ telegramLink.addEventListener("click", () => {
     lines.push("", "Темы, которые хочу обсудить:", ...topics.map(topic => "• " + topic));
   }
 
-  draft.search = "text=" + encodeURIComponent(lines.join("\n"));
+  draft.searchParams.set("text", lines.join("\n"));
+  draft.search = draft.search.replaceAll("+", "%20");
   telegramLink.href = draft.href;
 });
 
 questions.addEventListener("change", updateReview);
+otherTopicText.addEventListener("input", updateReview);
 window.addEventListener("pageshow", updateReview);
 updateReview();
 
