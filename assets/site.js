@@ -99,3 +99,15 @@ window.addEventListener("pageshow", schedulePaint);
 motionPreference.addEventListener("change", schedulePaint);
 
 updatePaint();
+
+if ("IntersectionObserver" in window && !motionPreference.matches) {
+  const priceList = document.querySelector(".price-list");
+  const revealPrices = new IntersectionObserver(([entry], observer) => {
+    if (!entry.isIntersecting) return;
+
+    priceList.classList.add("prices-in-view");
+    observer.disconnect();
+  }, { threshold: 0.12 });
+
+  revealPrices.observe(priceList);
+}
