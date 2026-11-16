@@ -2,16 +2,15 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; require-trusted-types-for 'script'">
+  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#F9F7F2">
   <meta name="description" content="Полина Киселёва — психолог-консультант. Встречи онлайн и в Симферополе. Первая встреча-знакомство — бесплатно.">
   <title>Полина Киселёва — психолог-консультант</title>
-  <link rel="icon" href="favicon.ico?v=thread" sizes="16x16 32x32 48x48">
-  <link rel="icon" href="assets/favicon.svg?v=thread" sizes="any" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600..700&family=Rubik:wght@400..700&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=paper-layout">
+  <link rel="icon" href="favicon.ico?v=spiral" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="assets/favicon.svg?v=spiral" sizes="any" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css?v=release">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">К содержанию</a>
@@ -45,7 +44,10 @@
           </svg>
         </div>
         <figure class="hero-art">
-          <img class="hero-portrait" src="assets/polina-portrait.jpg?v=november" alt="Портрет Полины Киселёвой" width="940" height="1280" fetchpriority="high">
+          <img class="hero-portrait" src="assets/polina-portrait.jpg?v=november"
+               srcset="assets/polina-portrait-520.jpg 520w, assets/polina-portrait.jpg?v=november 940w"
+               sizes="(min-width: 64rem) clamp(21rem, 24vw, 25rem), clamp(13.5rem, 68vw, 21.5rem)"
+               alt="Портрет Полины Киселёвой" width="940" height="1280" fetchpriority="high">
           <figcaption>Позволь себе чувствовать! Давай говорить об этом…</figcaption>
         </figure>
       </div>
@@ -67,13 +69,13 @@
           <li>
             <label>
               <input type="checkbox" value="Эмоциональное выгорание" aria-describedby="topic-instructions">
-              <span>Столкнулась (-лся) с эмоциональным выгоранием?</span>
+              <span>Чувствуешь, что выгораешь?</span>
             </label>
           </li>
           <li>
             <label>
               <input type="checkbox" value="Сложные чувства и внутренние переживания" aria-describedby="topic-instructions">
-              <span>Испытываешь сложные чувства (стыд, вина, злость и тп) или не понимаешь, что гложет внутри и мешает жить?</span>
+              <span>Трудно справиться со стыдом, виной или злостью?</span>
             </label>
           </li>
           <li>
@@ -85,13 +87,13 @@
           <li>
             <label>
               <input type="checkbox" value="Отношения с близкими людьми" aria-describedby="topic-instructions">
-              <span>Проблемы в отношениях с близкими людьми, а может их просто нет?</span>
+              <span>Проблемы в отношениях с близкими людьми?</span>
             </label>
           </li>
           <li>
             <label>
               <input type="checkbox" value="Неуверенность, самопринятие и страх" aria-describedby="topic-instructions">
-              <span>Не уверен (а) в себе или не можешь себя принять, испытываешь страх?</span>
+              <span>Сомневаешься в себе или трудно себя принять?</span>
             </label>
           </li>
           <li class="topic-wide">
@@ -107,13 +109,12 @@
             </label>
             <div class="topic-other-fields" id="other-topic-fields" hidden>
               <label for="other-topic-text">Твой запрос</label>
-              <textarea id="other-topic-text" rows="3" maxlength="240" aria-describedby="other-topic-hint"></textarea>
+              <textarea id="other-topic-text" rows="3" maxlength="240" autocomplete="off" spellcheck="false" aria-describedby="other-topic-hint"></textarea>
               <p id="other-topic-hint">До 240 символов. Подробности можно дописать в Telegram.</p>
             </div>
           </li>
         </ul>
         <div class="topic-actions">
-          <p class="address">ДАВАЙ НАЙДЕМ ОТВЕТЫ ВМЕСТЕ!</p>
           <a class="primary-action" href="#contact" aria-label="Дальше, к контактам">Дальше <span aria-hidden="true">↓</span></a>
         </div>
       </div>
@@ -123,7 +124,7 @@
       <div class="wrap format-layout">
         <div class="format-intro">
           <h2 id="format-title" class="section-hatched">Формат работы и стоимость</h2>
-          <p>Встречи онлайн/Оффлайн (Крым, Симферополь)</p>
+          <p>Встречи онлайн и в кабинете в Симферополе.</p>
         </div>
         <div class="pricing">
           <ol class="price-list" role="list" aria-label="Стоимость консультаций">
@@ -133,7 +134,7 @@
                 <span class="price-duration">30 минут</span>
               </div>
               <dl class="price-rates">
-                <div><dt>В онлайн формате</dt><dd>Бесплатно</dd></div>
+                <div><dt>Онлайн</dt><dd>Бесплатно</dd></div>
               </dl>
             </li>
             <li class="price-detail">
@@ -142,8 +143,8 @@
                 <span class="price-duration">50 минут</span>
               </div>
               <dl class="price-rates">
-                <div><dt>Онлайн</dt><dd>1500 руб</dd></div>
-                <div><dt>В кабинете</dt><dd>2000 руб</dd></div>
+                <div><dt>Онлайн</dt><dd>1 500 ₽</dd></div>
+                <div><dt>В кабинете</dt><dd>2 000 ₽</dd></div>
               </dl>
             </li>
             <li class="price-detail">
@@ -152,13 +153,13 @@
                 <span class="price-duration">50 минут</span>
               </div>
               <dl class="price-rates">
-                <div><dt>Онлайн</dt><dd>2000 руб</dd></div>
-                <div><dt>В кабинете</dt><dd>2500 руб</dd></div>
+                <div><dt>Онлайн</dt><dd>2 000 ₽</dd></div>
+                <div><dt>В кабинете</dt><dd>2 500 ₽</dd></div>
               </dl>
             </li>
           </ol>
-          <p class="pricing-note address">Как тебе будет комфортнее? Обсудим при Знакомстве.</p>
-          <p class="format-note"><strong>ВАЖНО:</strong> Сейчас я не работаю с ПТСР, с подростками (младше 18 лет), зависимостями и психиатрическими диагнозами</p>
+          <p class="pricing-note address">Как тебе будет комфортнее? Обсудим на первой встрече.</p>
+          <p class="format-note"><strong>Важно.</strong> Сейчас я не работаю с ПТСР, подростками младше 18 лет, зависимостями и психиатрическими диагнозами.</p>
         </div>
       </div>
     </section>
@@ -166,9 +167,9 @@
     <section class="faq painted" id="faq" aria-labelledby="faq-title">
       <div class="wrap faq-layout">
         <div class="faq-intro">
-          <h2 id="faq-title" class="section-hatched">Тут могут быть ответы на твои вопросы:</h2>
+          <h2 id="faq-title" class="section-hatched">Перед первой встречей</h2>
           <div class="faq-context">
-            <p>Вот подборка самых частых страхов и вопросов, с которыми Ты возможно уже столкнулся (лась) перед первой сессией.</p>
+            <p>Отвечаю на вопросы, которые часто возникают перед первой сессией.</p>
             <figure class="faq-photo">
               <img src="assets/polina-in-studio.jpg?v=portraits" alt="Полина Киселёва среди учебных материалов" width="942" height="1280" loading="lazy" decoding="async">
             </figure>
@@ -178,13 +179,13 @@
           <details>
             <summary class="address">Почему первая встреча короткая и бесплатная?<span class="faq-chevron" aria-hidden="true"></span></summary>
             <div class="faq-answer">
-              <p>Все логично и просто, первая сессия – наше знакомство. Это ознакомительный формат (обычно 30 минут), чтобы мы могли познакомиться, обсудить Твой запрос и понять, комфортно ли нам будет работать вместе. Это ни к чему Тебя не обязывает, но помогает безопасно сделать первый шаг и снять напряжение перед началом нашей работы.</p>
+              <p>На знакомство я отвожу 30 минут. Мы обсудим, с чем тебе хочется прийти, и поймём, комфортно ли нам работать вместе. После этого ты сам решишь, нужна ли следующая встреча.</p>
             </div>
           </details>
           <details>
             <summary class="address">Вдруг психолог осудит меня за мои мысли, слабости или поступки?<span class="faq-chevron" aria-hidden="true"></span></summary>
             <div class="faq-answer">
-              <p>Наше пространство — это пространство абсолютной безопасности и конфиденциальности. Здесь нет оценок «хорошо» или «плохо», «правильно» или «стыдно». Я рядом не для того, чтобы оценивать, а чтобы понять Тебя и помочь.</p>
+              <p>Я отношусь к нашим разговорам конфиденциально. Можно говорить и о том, за что тебе неловко. Я выслушаю тебя без осуждения и помогу разобраться.</p>
             </div>
           </details>
           <details>
@@ -215,7 +216,7 @@
           <details>
             <summary class="address">Сколько сессий понадобится, чтобы решить мою проблему?<span class="faq-chevron" aria-hidden="true"></span></summary>
             <div class="faq-answer">
-              <p>Тут всё очень индивидуально, ведь особенности психики у каждого свои, кто-то готов к быстрым решениям и переменам, ии, например, запрос не глубок и не требует глубинной проработки, тут может стать достаточным провести нескольких встреч и получить ясность. Для кого-то запрос связан с глубинными изменениями, они требуют больше времени для исследования и готовности к этому и тут мы будем двигаться бережно, ровно туда, где Ты уже готов (а), в моменте «здесь и сейчас». Важно то, что мы точно будем знать к чему и зачем идем.</p>
+              <p>Это зависит от твоего запроса. Иногда нескольких встреч хватает, чтобы яснее увидеть ситуацию. Если перемены требуют больше времени, мы обсудим, к чему ты хочешь прийти, и будем двигаться в подходящем тебе темпе.</p>
             </div>
           </details>
         </div>
@@ -224,7 +225,7 @@
 
     <section class="about painted" id="about" aria-labelledby="about-title">
       <div class="wrap">
-        <h2 id="about-title" class="section-hatched">Немного обо мне:</h2>
+        <h2 id="about-title" class="section-hatched">Немного обо мне</h2>
         <div class="about-layout">
           <figure class="about-photo">
             <img src="assets/polina-about-portrait.jpg?v=portraits" alt="Полина Киселёва улыбается, сидя на стуле" width="826" height="1280" loading="lazy" decoding="async">
@@ -241,7 +242,7 @@
     <div class="wrap">
       <div class="contact-layout bookend-layout">
         <div class="contact-intro bookend-copy">
-          <h2 id="contact-title">Я всегда здесь:</h2>
+          <h2 id="contact-title">Связаться со мной</h2>
           <p>Напиши, договоримся о первой встрече.</p>
         </div>
         <div class="contact-card">
@@ -256,7 +257,7 @@
             <a class="primary-action" id="telegram-request" href="https://t.me/polisha1703" target="_blank" rel="noopener noreferrer" aria-describedby="telegram-note">
               Написать в Telegram <span aria-hidden="true">↗</span>
             </a>
-            <p id="telegram-note">В чате откроется черновик. Его можно изменить перед отправкой.</p>
+            <p id="telegram-note">Выбранные темы попадут в черновик Telegram. Его можно изменить перед отправкой.</p>
           </div>
           <address class="contact-links">
             <a href="tel:+79787509650">
@@ -290,6 +291,6 @@
     <path id="thread-guide"/>
     <path id="thread-line"/>
   </svg>
-  <script src="assets/site.js?v=thread-scroll" defer></script>
+  <script src="assets/site.js?v=release" defer></script>
 </body>
 </html>
