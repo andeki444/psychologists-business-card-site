@@ -1,8 +1,3 @@
-/**
- * ПОЛИНА КИСЕЛЁВА — САЙТ-ВИЗИТКА ПСИХОЛОГА-КОНСУЛЬТАНТА
- * Нативный модульный скрипт без внешних зависимостей (60 FPS, < 0.8s FCP)
- */
-
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initRevealObserver();
@@ -14,9 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initClipboardCopy();
 });
 
-/**
- * 1. Мобильное меню с доступностью (aria-expanded) и закрытием по клику на якорь
- */
 function initMobileNav() {
   const burgerBtn = document.getElementById('burgerBtn');
   const siteNav = document.getElementById('siteNav');
@@ -42,9 +34,6 @@ function initMobileNav() {
   });
 }
 
-/**
- * 2. Плавное проявление элементов при скролле через нативный IntersectionObserver
- */
 function initRevealObserver() {
   const revealElements = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window) || revealElements.length === 0) {
@@ -74,9 +63,6 @@ function initRevealObserver() {
   revealElements.forEach((el) => observer.observe(el));
 }
 
-/**
- * 3. Анимация «распутывающейся нити» по мере прокрутки страницы (stroke-dashoffset)
- */
 function initScrollThreadAnimation() {
   const threadPath = document.getElementById('scrollThreadPath');
   if (!threadPath) return;
@@ -113,9 +99,6 @@ function initScrollThreadAnimation() {
   updateThread();
 }
 
-/**
- * 4. Интерактивный чек-лист в блоке «КАК ТЫ СЕЙЧАС?» с визуальным откликом клубка мыслей
- */
 function initPainChecklistMetaphor() {
   const painCards = document.querySelectorAll('.pain-card');
   const tangleSvg = document.getElementById('tangleSvg');
@@ -149,9 +132,6 @@ function initPainChecklistMetaphor() {
   });
 }
 
-/**
- * 5. Переключатель акцента формата встреч (Онлайн / В кабинете) в блоке стоимости
- */
 function initFormatSwitcher() {
   const buttons = document.querySelectorAll('.format-switcher__btn');
   const rateRows = document.querySelectorAll('.price-card__rate-row');
@@ -174,16 +154,12 @@ function initFormatSwitcher() {
   });
 }
 
-/**
- * 6. Плавный аккордеон FAQ без рывков контента
- */
 function initFaqAccordion() {
   const accordion = document.getElementById('faqAccordion');
   if (!accordion) return;
 
   const items = accordion.querySelectorAll('.faq-item');
 
-  // Инициализация открытых по умолчанию панелей
   items.forEach((item) => {
     const trigger = item.querySelector('.faq-item__trigger');
     const panel = item.querySelector('.faq-item__panel');
@@ -211,7 +187,6 @@ function initFaqAccordion() {
         }, 340);
       } else {
         panel.hidden = false;
-        // Форсируем reflow перед запуском CSS Grid-анимации
         void panel.offsetHeight;
         trigger.setAttribute('aria-expanded', 'true');
         panel.classList.add('is-open');
@@ -220,9 +195,6 @@ function initFaqAccordion() {
   });
 }
 
-/**
- * 7. Навигация карусели отзывов
- */
 function initReviewsCarousel() {
   const track = document.getElementById('reviewsTrack');
   const prevBtn = document.getElementById('prevReviewBtn');
@@ -243,9 +215,6 @@ function initReviewsCarousel() {
   });
 }
 
-/**
- * 8. Копирование телефона и почты в 1 клик с всплывающим уведомлением
- */
 function initClipboardCopy() {
   const copyButtons = document.querySelectorAll('.copy-btn');
   const toast = document.getElementById('copyToast');
