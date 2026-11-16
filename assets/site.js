@@ -63,32 +63,45 @@ const wideThreadLayout = window.matchMedia("(min-width: 64rem)");
 
 let activeSection = null;
 let pendingFrame = 0;
+let layoutPending = false;
 let threadLength = 0;
+let threadHeights = [];
+let sections = [];
+let pageHeight = 0;
+let lastDashOffset = "";
+const threadSampleSpacing = 24;
 
-function updateThreadProgress() {
+function updateThreadProgress(viewportTop, viewportHeight, atBottom) {
   if (!threadLength) return;
 
-  const viewportBottom = window.scrollY + window.innerHeight;
-  const atBottom = document.documentElement.scrollHeight - viewportBottom < 2;
   let drawn = threadLength;
 
   if (!motionPreference.matches && !atBottom) {
-    const readingPoint = window.scrollY + window.innerHeight * .76;
+    const readingPoint = viewportTop + viewportHeight * .76;
     let low = 0;
-    let high = threadLength;
-    // The thread descends continuously, so its visible tip can follow a height on screen.
-    for (let step = 0; step < 12; step += 1) {
-      const middle = (low + high) / 2;
-      if (threadLine.getPointAtLength(middle).y < readingPoint) {
+    let high = threadHeights.length - 1;
+    // Locate the tip using samples collected when the path was laid out.
+    while (high - low > 1) {
+      const middle = Math.floor((low + high) / 2);
+      if (threadHeights[middle] < readingPoint) {
         low = middle;
       } else {
         high = middle;
       }
     }
-    drawn = low;
+
+    const start = low * threadSampleSpacing;
+    const end = Math.min(high * threadSampleSpacing, threadLength);
+    const height = threadHeights[high] - threadHeights[low];
+    const fraction = Math.max(0, Math.min(1, (readingPoint - threadHeights[low]) / height));
+    drawn = start + fraction * (end - start);
   }
 
-  threadLine.setAttribute("stroke-dashoffset", (threadLength - drawn).toFixed(2));
+  const dashOffset = (threadLength - drawn).toFixed(2);
+  if (dashOffset !== lastDashOffset) {
+    threadLine.setAttribute("stroke-dashoffset", dashOffset);
+    lastDashOffset = dashOffset;
+  }
 }
 
 function setThreadInk(stops, startY, endY) {
@@ -122,14 +135,16 @@ function layoutThread() {
     lanes = [leftEdge + gap * .55, leftEdge + gap * .21];
   }
 
-  const sections = Array.from(paintedSections, section => {
+  pageHeight = document.documentElement.scrollHeight;
+  sections = Array.from(paintedSections, section => {
     const box = section.getBoundingClientRect();
     const style = getComputedStyle(section);
     return {
       top: box.top + scrollY,
       bottom: box.bottom + scrollY,
       paddingTop: parseFloat(style.paddingTop),
-      paddingBottom: parseFloat(style.paddingBottom)
+      paddingBottom: parseFloat(style.paddingBottom),
+      tone: style.getPropertyValue("--section-tone").trim()
     };
   });
 
@@ -167,40 +182,45 @@ function layoutThread() {
   threadGuide.setAttribute("d", route);
   threadLine.setAttribute("d", route);
   threadLength = threadLine.getTotalLength();
+  threadHeights = Array.from(
+    { length: Math.ceil(threadLength / threadSampleSpacing) + 1 },
+    (_, index) => threadLine.getPointAtLength(Math.min(index * threadSampleSpacing, threadLength)).y
+  );
   threadLine.setAttribute("stroke-dasharray", `${threadLength} ${threadLength}`);
   document.body.classList.add("thread-ready");
-  updateThreadProgress();
 }
 
 function updatePaint() {
   pendingFrame = 0;
-  updateThreadProgress();
+  if (layoutPending) {
+    layoutPending = false;
+    layoutThread();
+  }
+
+  const viewportTop = window.scrollY;
+  const viewportHeight = window.innerHeight;
+  const atBottom = pageHeight - viewportTop - viewportHeight < 2;
+  updateThreadProgress(viewportTop, viewportHeight, atBottom);
 
   if (motionPreference.matches) {
-    rootStyle.removeProperty("--current-tone");
-    activeSection = null;
+    if (activeSection) {
+      rootStyle.removeProperty("--current-tone");
+      activeSection = null;
+    }
     return;
   }
 
-  const readingLine = window.innerHeight * 0.55;
-  let visibleSection = paintedSections[0];
-
-  for (const section of paintedSections) {
-    if (section.getBoundingClientRect().top > readingLine) break;
+  const readingLine = viewportTop + viewportHeight * .55;
+  let visibleSection = sections[0];
+  for (const section of sections) {
+    if (!atBottom && section.top > readingLine) break;
     visibleSection = section;
   }
 
-  const distanceFromBottom =
-    document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
-  if (distanceFromBottom < 2) {
-    visibleSection = paintedSections[paintedSections.length - 1];
-  }
-
-  if (activeSection === visibleSection) return;
+  if (!visibleSection || activeSection === visibleSection) return;
 
   activeSection = visibleSection;
-  const tone = getComputedStyle(activeSection).getPropertyValue("--section-tone").trim();
-  rootStyle.setProperty("--current-tone", tone);
+  rootStyle.setProperty("--current-tone", activeSection.tone);
 }
 
 function schedulePaint() {
@@ -209,20 +229,19 @@ function schedulePaint() {
   }
 }
 
+function scheduleLayout() {
+  layoutPending = true;
+  schedulePaint();
+}
+
 window.addEventListener("scroll", schedulePaint, { passive: true });
-window.addEventListener("resize", () => {
-  layoutThread();
-  schedulePaint();
-});
-window.addEventListener("pageshow", () => {
-  layoutThread();
-  schedulePaint();
-});
+window.addEventListener("resize", scheduleLayout);
+window.addEventListener("pageshow", scheduleLayout);
 motionPreference.addEventListener("change", schedulePaint);
 
 layoutThread();
 if (threadLength && "ResizeObserver" in window) {
-  const threadResize = new ResizeObserver(layoutThread);
+  const threadResize = new ResizeObserver(scheduleLayout);
   threadResize.observe(document.body);
   threadResize.observe(document.querySelector(".hero-copy"));
   threadResize.observe(document.querySelector(".contact-intro"));

@@ -14,10 +14,12 @@
   --focus: #70551F;
   --line: #DDD6C7;
   --frame-line: #C6A86B;
+  --selection: rgb(198 168 107 / 30%);
   --surface: rgb(253 252 248 / 92%);
   --handwriting: Caveat, "Segoe Print", cursive;
   --sans: Rubik, "Segoe UI", sans-serif;
   --gutter: clamp(1rem, 4vw, 3.75rem);
+  --page-width: 75rem;
   --section-space: clamp(3.25rem, 7vw, 6rem);
   --acrylic: url("acrylic-wash.webp");
   --ink-corner: url("ink-corner.svg");
@@ -33,6 +35,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-block-start: 1rem;
 }
 
 body {
@@ -126,12 +129,13 @@ a {
 }
 
 ::selection {
-  background: var(--gold-light);
+  background-color: var(--selection);
   color: var(--ink);
+  text-shadow: none;
 }
 
 .wrap {
-  width: min(75rem, calc(100% - 2 * var(--gutter)));
+  width: min(var(--page-width), calc(100% - 2 * var(--gutter)));
   margin-inline: auto;
 }
 
@@ -1119,9 +1123,41 @@ a {
   :root {
     --muted: #504F57;
     --surface: rgb(253 252 248 / 96%);
+    --page-width: 88rem;
+    --gutter: clamp(2rem, 4vw, 5rem);
     --section-space: clamp(3.75rem, 5.2vw, 5rem);
     --desktop-columns: minmax(0, .88fr) minmax(0, 1.12fr);
     --desktop-gap: clamp(2.75rem, 5.3vw, 5rem);
+    --scrollbar-thumb: #8F7851;
+    --scrollbar-track: #F1EBE0;
+  }
+
+  html {
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    scrollbar-width: auto;
+  }
+
+  @supports not (scrollbar-color: auto) {
+    html::-webkit-scrollbar-track {
+      background-color: var(--scrollbar-track);
+    }
+
+    html::-webkit-scrollbar-thumb {
+      border: 3px solid var(--scrollbar-track);
+      border-radius: 1rem;
+      background-color: var(--scrollbar-thumb);
+    }
+  }
+
+  body {
+    --page-margin: max(var(--gutter), calc((100% - var(--page-width)) / 2));
+    --margin-rule-inset: calc(var(--page-margin) - clamp(1.25rem, 2vw, 2.75rem));
+    --margin-rule: linear-gradient(rgb(174 132 36 / 16%), rgb(174 132 36 / 16%));
+    background:
+      var(--margin-rule) left var(--margin-rule-inset) top / 1px 100% no-repeat,
+      var(--margin-rule) right var(--margin-rule-inset) top / 1px 100% no-repeat,
+      var(--paper) var(--grain);
   }
 
   .painted {
@@ -1142,6 +1178,16 @@ a {
     --wash-right: max(-13rem, calc(50% - 52rem));
     --wash-bottom: -39%;
     --wash-opacity: .37;
+    padding-block: clamp(1.5rem, 2.4vw, 2.25rem) clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .hero-layout {
+    padding-top: clamp(2rem, 3vw, 3rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(3.4rem, 4.4vw, 5.25rem);
+    line-height: 1.06;
   }
 
   .requests, .faq {
@@ -1187,7 +1233,8 @@ a {
   }
 
   .hero-art {
-    margin-inline: 0;
+    width: min(100%, clamp(21rem, 24vw, 25rem));
+    margin-inline: 0 clamp(1.5rem, 4vw, 4.75rem);
     justify-self: end;
   }
 
@@ -1281,5 +1328,16 @@ a {
 
   .topic-list > li > label, .primary-action, .painted::before, .painted::after {
     transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  html {
+    scrollbar-color: auto;
+  }
+
+  ::selection {
+    background-color: Highlight;
+    color: HighlightText;
   }
 }
