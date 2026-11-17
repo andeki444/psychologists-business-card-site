@@ -1,5 +1,6 @@
 Options -Indexes
 DirectoryIndex index.html
+ErrorDocument 404 /404.html
 
 <LimitExcept GET HEAD>
     Require all denied
@@ -19,6 +20,11 @@ DirectoryIndex index.html
 
     <Files "index.html">
         Header set Cache-Control "no-cache"
+    </Files>
+
+    <Files "404.html">
+        Header always set Content-Security-Policy "frame-ancestors 'none'"
+        Header always set Cache-Control "no-cache"
     </Files>
 
     <FilesMatch "\.(?:css|js|ico|jpe?g|svg|webp|woff2)$">

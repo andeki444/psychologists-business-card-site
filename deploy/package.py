@@ -8,6 +8,7 @@ from zipfile import ZIP_DEFLATED, ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_FILES = (
     "index.html",
+    "404.html",
     "favicon.ico",
     "assets/site.css",
     "assets/site.js",
