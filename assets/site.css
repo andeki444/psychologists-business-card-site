@@ -963,9 +963,35 @@ a {
 }
 
 .request-review {
+  position: relative;
   margin-bottom: 1.15rem;
-  padding-bottom: 1.05rem;
-  border-bottom: 1px solid var(--line);
+  padding: clamp(.85rem, 2.8vw, 1.3rem);
+  border: 1px solid var(--frame-line);
+  border-inline-start-width: 3px;
+  border-radius: .25rem;
+  background: #FAF4E7 var(--grain);
+}
+
+.contact:target .request-review {
+  border-color: var(--gold-dark);
+  background-color: #F8EED8;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact:target .request-review:not([hidden])::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--gold-dark);
+    border-radius: .5rem;
+    pointer-events: none;
+    animation: review-outline 850ms ease-out 150ms both;
+  }
+
+  @keyframes review-outline {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
 }
 
 .review-heading {
@@ -977,7 +1003,15 @@ a {
 }
 
 .review-heading h3 {
-  font-size: 1.15rem;
+  font: italic 700 clamp(1.75rem, 4vw, 2.15rem)/1.1 var(--handwriting);
+}
+
+.review-heading h3::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: .35rem;
+  background: var(--ink-stroke) left center / 100% 100% no-repeat;
 }
 
 .review-heading a {
@@ -991,7 +1025,7 @@ a {
 }
 
 .request-review ul {
-  margin: .25rem 0 0;
+  margin: .5rem 0 0;
   padding-inline-start: 1.1em;
   font-size: .94rem;
 }
@@ -1007,6 +1041,15 @@ a {
 
 .request-review li::marker {
   color: var(--gold-dark);
+}
+
+.review-note {
+  margin-top: .75rem;
+  padding-top: .65rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .875rem;
+  line-height: 1.45;
 }
 
 .telegram-action p {
