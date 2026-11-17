@@ -852,6 +852,21 @@ a {
   border-top: 1px solid #CFD9CB;
 }
 
+:is(.faq-answer, .about-methods > ul) {
+  position: relative;
+}
+
+:is(.faq-answer, .about-methods > ul)::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: min(4.6rem, 32%);
+  block-size: .3rem;
+  background: var(--ink-stroke) left center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
 .faq-answer p {
   max-width: 65ch;
   color: var(--muted);
@@ -861,9 +876,14 @@ a {
   margin-top: .75rem;
 }
 
-@keyframes faq-answer-arrival {
+@keyframes disclosure-fade {
   from { opacity: .25; }
   to { opacity: 1; }
+}
+
+@keyframes disclosure-ink {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -871,42 +891,40 @@ a {
     transition: background-color 190ms ease, border-color 190ms ease;
   }
 
+  .faq-chevron {
+    transition: background-color 190ms ease, border-color 190ms ease;
+  }
+
   .faq-chevron::before {
-    transition: transform 220ms ease;
+    transition: transform 290ms ease;
   }
 
-  .faq-list details[open] .faq-answer {
-    animation: faq-answer-arrival 220ms ease-out;
+  :is(.faq-list details, .about-methods)[open] > :is(.faq-answer, ul) {
+    animation: disclosure-fade 220ms ease-out;
   }
 
-  @supports selector(details::details-content) and (transition-behavior: allow-discrete) {
-    .faq-list details[open] .faq-answer {
+  :is(.faq-list details, .about-methods)[open] > :is(.faq-answer, ul)::before {
+    animation: disclosure-ink 250ms ease-out 80ms both;
+  }
+
+  @supports selector(details::details-content) and (interpolate-size: allow-keywords) and (transition-behavior: allow-discrete) {
+    :is(.faq-list details, .about-methods)[open] > :is(.faq-answer, ul) {
       animation: none;
     }
 
-    .faq-list details::details-content {
+    :is(.faq-list details, .about-methods)::details-content {
+      interpolate-size: allow-keywords;
+      contain: layout;
       overflow: clip;
       opacity: 0;
-      transition: opacity 210ms ease, block-size 270ms ease,
-        content-visibility 270ms allow-discrete;
+      block-size: 0;
+      transition: opacity 220ms ease, block-size 330ms cubic-bezier(.22, .68, .27, 1),
+        content-visibility 330ms allow-discrete, display 330ms allow-discrete;
     }
 
-    .faq-list details[open]::details-content {
+    :is(.faq-list details, .about-methods)[open]::details-content {
       opacity: 1;
-    }
-
-    @supports (interpolate-size: allow-keywords) {
-      .faq-list details {
-        interpolate-size: allow-keywords;
-      }
-
-      .faq-list details::details-content {
-        block-size: 0;
-      }
-
-      .faq-list details[open]::details-content {
-        block-size: auto;
-      }
+      block-size: auto;
     }
   }
 }
@@ -959,7 +977,9 @@ a {
 
 .about-methods ul {
   margin: 0 0 .35rem;
+  padding-block-start: .65rem;
   padding-inline-start: 1.2em;
+  border-top: 1px solid var(--line);
 }
 
 .about-methods li + li {
