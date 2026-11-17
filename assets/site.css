@@ -956,7 +956,7 @@ a {
   max-width: 45ch;
 }
 
-.about-copy p + p {
+.about-copy :is(p, .about-methods) + p {
   margin-top: .85rem;
 }
 
