@@ -10,6 +10,8 @@ PUBLIC_FILES = (
     "index.html",
     "404.html",
     "favicon.ico",
+    "robots.txt",
+    "sitemap.xml",
     "assets/site.css",
     "assets/site.js",
     "assets/acrylic-wash.webp",
