@@ -10,6 +10,7 @@ PUBLIC_FILES = (
     "index.html",
     "404.html",
     "favicon.ico",
+    "favicon.png",
     "robots.txt",
     "sitemap.xml",
     "assets/site.css",
