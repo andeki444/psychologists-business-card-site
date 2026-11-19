@@ -30,6 +30,8 @@ PUBLIC_FILES = (
     "assets/fonts/Rubik-OFL.txt",
     "assets/fonts/caveat-v23-cyrillic.woff2",
     "assets/fonts/caveat-v23-latin.woff2",
+    "assets/fonts/caveat-v23-bold-cyrillic.woff2",
+    "assets/fonts/caveat-v23-bold-latin.woff2",
     "assets/fonts/rubik-v31-cyrillic.woff2",
     "assets/fonts/rubik-v31-latin.woff2",
 )

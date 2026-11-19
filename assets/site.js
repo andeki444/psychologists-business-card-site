@@ -52,7 +52,6 @@ updateReview();
 
 const paintedSections = document.querySelectorAll(".painted");
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-const rootStyle = document.documentElement.style;
 const threadStart = document.getElementById("thread-start");
 const threadHand = document.getElementById("thread-hand");
 const threadGuide = document.getElementById("thread-guide");
@@ -61,46 +60,48 @@ const threadInk = document.getElementById("thread-ink");
 const splitHeroLayout = window.matchMedia("(min-width: 48rem)");
 const wideThreadLayout = window.matchMedia("(min-width: 64rem)");
 
-let activeSection = null;
 let pendingFrame = 0;
 let layoutPending = false;
-let threadLength = 0;
-let threadHeights = [];
+let threadParts = [];
 let sections = [];
 let pageHeight = 0;
-let lastDashOffset = "";
 const threadSampleSpacing = 24;
+const svgNamespace = "http://www.w3.org/2000/svg";
+const paintTones = new WeakMap();
 
 function updateThreadProgress(viewportTop, viewportHeight, atBottom) {
-  if (!threadLength) return;
+  const readingPoint = motionPreference.matches || atBottom ? Infinity : viewportTop + viewportHeight * .76;
 
-  let drawn = threadLength;
+  for (const part of threadParts) {
+    const { path, length, heights } = part;
+    let dashOffset = "0";
 
-  if (!motionPreference.matches && !atBottom) {
-    const readingPoint = viewportTop + viewportHeight * .76;
-    let low = 0;
-    let high = threadHeights.length - 1;
-    // Locate the tip using samples collected when the path was laid out.
-    while (high - low > 1) {
-      const middle = Math.floor((low + high) / 2);
-      if (threadHeights[middle] < readingPoint) {
-        low = middle;
-      } else {
-        high = middle;
+    if (readingPoint <= heights[0]) {
+      dashOffset = null;
+    } else if (readingPoint < heights[heights.length - 1]) {
+      let low = 0;
+      let high = heights.length - 1;
+      // Only the section containing the tip needs a partial stroke.
+      while (high - low > 1) {
+        const middle = Math.floor((low + high) / 2);
+        if (heights[middle] < readingPoint) {
+          low = middle;
+        } else {
+          high = middle;
+        }
       }
+      const start = low * threadSampleSpacing;
+      const end = Math.min(high * threadSampleSpacing, length);
+      const fraction = (readingPoint - heights[low]) / (heights[high] - heights[low]);
+      dashOffset = (length - start - fraction * (end - start)).toFixed(2);
     }
 
-    const start = low * threadSampleSpacing;
-    const end = Math.min(high * threadSampleSpacing, threadLength);
-    const height = threadHeights[high] - threadHeights[low];
-    const fraction = Math.max(0, Math.min(1, (readingPoint - threadHeights[low]) / height));
-    drawn = start + fraction * (end - start);
-  }
-
-  const dashOffset = (threadLength - drawn).toFixed(2);
-  if (dashOffset !== lastDashOffset) {
-    threadLine.setAttribute("stroke-dashoffset", dashOffset);
-    lastDashOffset = dashOffset;
+    if (dashOffset === part.dashOffset) continue;
+    if (dashOffset === null || part.dashOffset === null) {
+      path.setAttribute("visibility", dashOffset === null ? "hidden" : "visible");
+    }
+    if (dashOffset !== null) path.setAttribute("stroke-dashoffset", dashOffset);
+    part.dashOffset = dashOffset;
   }
 }
 
@@ -108,7 +109,7 @@ function setThreadInk(stops, startY, endY) {
   threadInk.setAttribute("y1", startY);
   threadInk.setAttribute("y2", endY);
   threadInk.replaceChildren(...stops.map(([y, opacity]) => {
-    const stop = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    const stop = document.createElementNS(svgNamespace, "stop");
     stop.setAttribute("offset", (y - startY) / (endY - startY));
     stop.setAttribute("stop-opacity", opacity);
     return stop;
@@ -140,6 +141,7 @@ function layoutThread() {
     const box = section.getBoundingClientRect();
     const style = getComputedStyle(section);
     return {
+      element: section,
       top: box.top + scrollY,
       bottom: box.bottom + scrollY,
       paddingTop: parseFloat(style.paddingTop),
@@ -158,6 +160,8 @@ function layoutThread() {
   const entryY = startY + (wide ? 68 : 29);
   const lead = Math.min(34, (x - startX) * .52);
   let route = `M ${startX} ${startY} C ${startX + lead} ${startY + 2}, ${x} ${startY + 6}, ${x} ${entryY}`;
+  let partStart = route;
+  const routes = [];
   const stops = [[startY, .82], [entryY, quiet]];
 
   for (let index = 0; index < sections.length - 1; index += 1) {
@@ -168,25 +172,41 @@ function layoutThread() {
     const height = toY - fromY;
     const nextX = lanes[(index + 1) % lanes.length];
     const bend = index % 2 === 0 ? .64 : .46;
-    route += ` L ${x} ${fromY} C ${x} ${fromY + height * bend}, ${nextX} ${toY - height * .55}, ${nextX} ${toY}`;
+    const bendRoute = ` L ${x} ${fromY} C ${x} ${fromY + height * bend}, ${nextX} ${toY - height * .55}, ${nextX} ${toY}`;
+    route += bendRoute;
+    routes.push(partStart + bendRoute);
+    partStart = `M ${nextX} ${toY}`;
     stops.push([fromY, quiet], [fromY + height * .26, .85], [toY - height * .24, .85], [toY, quiet]);
     x = nextX;
   }
 
   const footerY = threadHand.closest(".footer-signature").getBoundingClientRect().top + scrollY;
   const turnY = footerY - 13;
-  route += ` L ${x} ${turnY} C ${x} ${endY - 10}, ${endX - 31} ${endY - 5}, ${endX} ${endY}`;
+  const finalRoute = ` L ${x} ${turnY} C ${x} ${endY - 10}, ${endX - 31} ${endY - 5}, ${endX} ${endY}`;
+  route += finalRoute;
+  routes.push(partStart + finalRoute);
   stops.push([turnY, quiet], [turnY + (endY - turnY) * .55, .82], [endY, .82]);
 
   setThreadInk(stops, startY, endY);
   threadGuide.setAttribute("d", route);
-  threadLine.setAttribute("d", route);
-  threadLength = threadLine.getTotalLength();
-  threadHeights = Array.from(
-    { length: Math.ceil(threadLength / threadSampleSpacing) + 1 },
-    (_, index) => threadLine.getPointAtLength(Math.min(index * threadSampleSpacing, threadLength)).y
-  );
-  threadLine.setAttribute("stroke-dasharray", `${threadLength} ${threadLength}`);
+  const paths = routes.map(partRoute => {
+    const path = document.createElementNS(svgNamespace, "path");
+    path.setAttribute("d", partRoute);
+    path.setAttribute("visibility", "hidden");
+    return path;
+  });
+  threadLine.replaceChildren(...paths);
+  threadParts = paths.map(path => {
+    const length = path.getTotalLength();
+    const heights = Array.from(
+      { length: Math.ceil(length / threadSampleSpacing) + 1 },
+      (_, index) => path.getPointAtLength(Math.min(index * threadSampleSpacing, length)).y
+    );
+    return { path, length, heights, dashOffset: null };
+  });
+  for (const { path, length } of threadParts) {
+    path.setAttribute("stroke-dasharray", `${length} ${length}`);
+  }
   document.body.classList.add("thread-ready");
 }
 
@@ -202,14 +222,6 @@ function updatePaint() {
   const atBottom = pageHeight - viewportTop - viewportHeight < 2;
   updateThreadProgress(viewportTop, viewportHeight, atBottom);
 
-  if (motionPreference.matches) {
-    if (activeSection) {
-      rootStyle.removeProperty("--current-tone");
-      activeSection = null;
-    }
-    return;
-  }
-
   const readingLine = viewportTop + viewportHeight * .55;
   let visibleSection = sections[0];
   for (const section of sections) {
@@ -217,10 +229,15 @@ function updatePaint() {
     visibleSection = section;
   }
 
-  if (!visibleSection || activeSection === visibleSection) return;
-
-  activeSection = visibleSection;
-  rootStyle.setProperty("--current-tone", activeSection.tone);
+  const tone = motionPreference.matches ? "" : visibleSection?.tone;
+  const margin = viewportHeight * .5;
+  for (const { element, top, bottom } of sections) {
+    if (element.classList.contains("bookend") || paintTones.get(element) === tone) continue;
+    if (tone && (bottom < viewportTop - margin || top > viewportTop + viewportHeight + margin)) continue;
+    if (tone) element.style.setProperty("--current-tone", tone);
+    else element.style.removeProperty("--current-tone");
+    paintTones.set(element, tone);
+  }
 }
 
 function schedulePaint() {
@@ -234,13 +251,15 @@ function scheduleLayout() {
   schedulePaint();
 }
 
-window.addEventListener("scroll", schedulePaint, { passive: true });
+window.addEventListener("scroll", () => {
+  if (!motionPreference.matches) schedulePaint();
+}, { passive: true });
 window.addEventListener("resize", scheduleLayout);
 window.addEventListener("pageshow", scheduleLayout);
 motionPreference.addEventListener("change", schedulePaint);
 
 layoutThread();
-if (threadLength && "ResizeObserver" in window) {
+if (threadParts.length && "ResizeObserver" in window) {
   const threadResize = new ResizeObserver(scheduleLayout);
   threadResize.observe(document.body);
   threadResize.observe(document.querySelector(".hero-copy"));
