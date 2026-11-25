@@ -397,6 +397,11 @@ a {
   min-width: 0;
 }
 
+.hero-copy > p {
+  margin-top: .65rem;
+  color: var(--muted);
+}
+
 .hero h1 {
   font-size: clamp(2.28rem, 10.4vw, 4.25rem);
   line-height: 1;
